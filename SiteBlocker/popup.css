@@ -1,0 +1,132 @@
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --bg-color: #111827;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --border-color: #374151;
+  --card-bg: #1f2937;
+}
+
+body {
+  width: 320px;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+
+.container {
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+header h2 {
+  margin: 0 0 5px 0;
+  font-size: 1.25rem;
+  color: var(--primary-color);
+}
+
+header p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary-color);
+}
+
+button {
+  padding: 10px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+.list-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: var(--card-bg);
+  margin-bottom: 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  border: 1px solid var(--border-color);
+}
+
+li span {
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: var(--danger);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border: 1px solid var(--danger);
+}
+
+.delete-btn:hover {
+  background-color: var(--danger);
+  color: white;
+}
+
+/* Scrollbar özelleştirmesi */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 3px;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Scroll</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="title">Sovereign Scroll</div>
+            <div class="header-controls">
+                <button id="langToggle" class="lang-btn">TR/EN</button>
+                <button id="themeToggle" class="theme-btn">🌙</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="subtitle" data-tr="Dijital İrade ve Odak Asistanı" data-en="Digital Willpower and Focus Assistant">Dijital İrade ve Odak Asistanı</div>
+            
+            <!-- Toggle List -->
+            <div class="toggle-section">
+                <div class="toggle-item">
+                    <label class="toggle-label" for="scrollLimit">
+                        <span data-tr="Her 10 kaydırmada bir durdur" data-en="Stop every 10 scrolls">Her 10 kaydırmada bir durdur</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="scrollLimit">
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="toggle-item">
+                    <label class="toggle-label" for="timeLimit">
+                        <span data-tr="Her 5 dakikada bir akışı dondur" data-en="Freeze feed every 5 minutes">Her 5 dakikada bir akışı dondur</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="timeLimit">
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="toggle-item">
+                    <label class="toggle-label" for="awarenessQuestion">
+                        <span data-tr="Kaydırmaya devam etmek istiyor musun?" data-en="Do you want to continue scrolling?">Kaydırmaya devam etmek istiyor musun?</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="awarenessQuestion">
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="toggle-item">
+                    <label class="toggle-label" for="strictMode">
+                        <span data-tr="Belirli bir süre sonra sayfayı kilitle" data-en="Lock page after certain time">Belirli bir süre sonra sayfayı kilitle</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="strictMode">
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-section">
+                <div class="stat-item">
+                    <span class="stat-label" data-tr="Bugünkü kaydırma" data-en="Today's scrolls">Bugünkü kaydırma</span>
+                    <span class="stat-value" id="scrollCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label" data-tr="Kazanılan zaman" data-en="Time saved">Kazanılan zaman</span>
+                    <span class="stat-value" id="timeSaved">0dk</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="signature">
+                <span data-tr="Cuma Karadash tarafından geliştirildi" data-en="Developed by Cuma Karadash">Cuma Karadash tarafından geliştirildi</span>
+            </div>
+            <div class="footer-buttons">
+                <button id="githubBtn" class="footer-btn github-btn">GitHub</button>
+                <button id="coffeeBtn" class="footer-btn coffee-btn">Bir kahve ısmarla</button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

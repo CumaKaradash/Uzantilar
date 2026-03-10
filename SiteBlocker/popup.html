@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Engelleyici</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="icons/coffee.svg" alt="Logo" style="width: 48px; height: 48px; margin-bottom: 8px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h2>Odak Modu</h2>
+      <p>Engellenecek siteleri aşağıya ekleyin.</p>
+    </header>
+    
+    <main>
+      <div class="input-group">
+        <input type="text" id="siteInput" placeholder="Örn: facebook.com" autocomplete="off">
+        <button id="addBtn">Ekle</button>
+      </div>
+      
+      <div class="list-container">
+        <ul id="blockedList">
+          <!-- Dinamik olarak JavaScript ile doldurulacak -->
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

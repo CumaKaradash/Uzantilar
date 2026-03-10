@@ -1,0 +1,151 @@
+/*
+ * Dyslexia Beam — content.css
+ *
+ * @font-face tanımları ve beam overlay stilleri burada.
+ * Eklenti etkin olmadığında hiçbir stil uygulanmaz —
+ * sınıflar body'e JS tarafından eklenir/kaldırılır.
+ */
+
+/* ─── FONT TANIMLARI ─────────────────────────────────────────────────────────
+ *
+ * Fontlar chrome.runtime.getURL() ile eklenti içinden yüklenir.
+ * Dosya yolları web_accessible_resources içinde tanımlı olmalı.
+ * Bu @font-face kuralları her zaman sayfaya enjekte edilir,
+ * ancak font sadece .db-font-active sınıfı eklendiğinde kullanılır.
+ */
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('fonts/OpenDyslexic-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('fonts/OpenDyslexic-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('fonts/OpenDyslexic-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── FON UYGULAMA ───────────────────────────────────────────────────────────
+ *
+ * .db-font-active sınıfı body'e eklendiğinde devreye girer.
+ * !important kullanımı zorunludur — sayfa kendi font stillerini override eder.
+ *
+ * Hedeflenen elementler:
+ *   body, p, span, div, h1-h6, li, td, th, a, label, input, textarea, button
+ *   — kısacası görünür metin içeren her şey.
+ *
+ * GÜNCELLEME: Eğer belirli bir element grubu fontu görmüyorsa,
+ * buraya yeni selector ekleyebilirsin.
+ */
+
+body.db-font-active,
+body.db-font-active p,
+body.db-font-active span,
+body.db-font-active div,
+body.db-font-active h1,
+body.db-font-active h2,
+body.db-font-active h3,
+body.db-font-active h4,
+body.db-font-active h5,
+body.db-font-active h6,
+body.db-font-active li,
+body.db-font-active a,
+body.db-font-active label,
+body.db-font-active td,
+body.db-font-active th,
+body.db-font-active caption,
+body.db-font-active figcaption,
+body.db-font-active blockquote,
+body.db-font-active cite,
+body.db-font-active code,
+body.db-font-active pre,
+body.db-font-active input,
+body.db-font-active textarea,
+body.db-font-active select,
+body.db-font-active button {
+  font-family: 'OpenDyslexic', sans-serif !important;
+  /* Disleksi dostu okunabilirlik ayarları */
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.15em !important;
+  line-height: 1.6 !important;
+}
+
+/* ─── BEAM OVERLAY ───────────────────────────────────────────────────────────
+ *
+ * #db-beam: Fare imlecinin bulunduğu satırı vurgulayan yatay şerit.
+ * pointer-events: none → sayfadaki tıklamaları engellemez.
+ * transform: translateY() → JS tarafından fare pozisyonuna göre güncellenir.
+ * transition → yumuşak hareket için.
+ */
+
+#db-beam {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 36px;                         /* Ortalama bir satır yüksekliği */
+  pointer-events: none;                 /* Tıklamaları geçirir */
+  z-index: 2147483646;                  /* Her şeyin üzerinde, ama modal popup'ların altında */
+  transform: translateY(-100px);        /* Başlangıçta ekran dışı */
+  transition: transform 80ms ease-out, /* Hızlı ama yumuşak takip */
+              opacity 200ms ease;
+  opacity: 0;
+
+  /* Beam rengi — iki kenarda solan sarı ışık efekti */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 220, 80, 0.18) 8%,
+    rgba(255, 220, 80, 0.28) 50%,
+    rgba(255, 220, 80, 0.18) 92%,
+    transparent 100%
+  );
+
+  /* Üst ve alt kenarlar için yumuşak sınır çizgisi */
+  border-top:    1px solid rgba(255, 200, 40, 0.25);
+  border-bottom: 1px solid rgba(255, 200, 40, 0.25);
+
+  /* Hafif iç parlaklık */
+  box-shadow: 0 0 16px rgba(255, 220, 80, 0.10);
+}
+
+/* .db-beam-active sınıfı body'e eklenince beam görünür olur */
+body.db-beam-active #db-beam {
+  opacity: 1;
+}
+
+/* ─── DARK MODE BEAM ─────────────────────────────────────────────────────────
+ *
+ * Sayfanın karanlık modunda (prefers-color-scheme: dark veya body'nin
+ * arka plan rengi koyu ise) beam rengi daha belirgin mavi-mor tona çekilir.
+ * Bu, beyaz metin üzerinde sarı vurgunun körleştirici etkisini önler.
+ *
+ * NOT: Bu kural body.db-dark-mode sınıfıyla JS tarafından uygulanır.
+ */
+
+body.db-dark-mode #db-beam {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(100, 170, 255, 0.12) 8%,
+    rgba(100, 170, 255, 0.20) 50%,
+    rgba(100, 170, 255, 0.12) 92%,
+    transparent 100%
+  );
+  border-top:    1px solid rgba(100, 170, 255, 0.20);
+  border-bottom: 1px solid rgba(100, 170, 255, 0.20);
+  box-shadow: 0 0 20px rgba(100, 170, 255, 0.08);
+}

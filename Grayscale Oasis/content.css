@@ -1,0 +1,7 @@
+/* Content script styles for Grayscale Oasis extension */
+
+.sovereign-grayscale {
+    filter: grayscale(100%) !important;
+    -webkit-filter: grayscale(100%) !important;
+    transition: filter 0.5s ease-in-out !important;
+}

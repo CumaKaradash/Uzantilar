@@ -1,0 +1,294 @@
+/* ─── Reading Mask — popup.css ───────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Syne+Mono&display=swap');
+
+/* ─── Themes ─────────────────────────────────────────────────────────────── */
+
+:root {
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t:    0.22s var(--ease);
+  --r:    10px;
+  --r-sm: 6px;
+}
+
+.theme-dark {
+  --bg:            #0c0c0d;
+  --bg-card:       #141416;
+  --bg-elevated:   #1c1c20;
+  --border:        rgba(255,255,255,0.07);
+  --border-focus:  rgba(251,191,36,0.45);
+  --text:          #e8e4dc;
+  --text-dim:      #6b6860;
+  --text-muted:    #323230;
+  --accent:        #fbbf24;   /* warm amber spotlight colour */
+  --accent-dim:    rgba(251,191,36,0.12);
+  --accent-glow:   rgba(251,191,36,0.30);
+  --power-on-ring: rgba(251,191,36,0.22);
+  --off-color:     #3a3a3e;
+}
+
+.theme-light {
+  --bg:            #f5f3ee;
+  --bg-card:       #ffffff;
+  --bg-elevated:   #ebe9e3;
+  --border:        rgba(0,0,0,0.08);
+  --border-focus:  rgba(180,130,0,0.4);
+  --text:          #1a1916;
+  --text-dim:      #7a7770;
+  --text-muted:    #c8c5bd;
+  --accent:        #d97706;
+  --accent-dim:    rgba(217,119,6,0.1);
+  --accent-glow:   rgba(217,119,6,0.25);
+  --power-on-ring: rgba(217,119,6,0.2);
+  --off-color:     #c5c3bc;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { width: 300px; }
+
+body {
+  width: 300px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--t), color var(--t);
+}
+
+button { cursor: pointer; font-family: inherit; }
+
+/* ─── Shell ──────────────────────────────────────────────────────────────── */
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 14px;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 14px 11px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon-btn {
+  all: unset;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  border-radius: var(--r-sm);
+  color: var(--text-dim);
+  font-family: 'Syne Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all var(--t);
+  letter-spacing: 0.05em;
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  border-color: var(--border-focus);
+  background: var(--accent-dim);
+}
+
+/* ─── Power section ──────────────────────────────────────────────────────── */
+
+.power-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 26px 14px 20px;
+}
+
+/* Spinning ring when on */
+.power-ring {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.power-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) 0deg, transparent 240deg);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.power-ring.is-on::before {
+  opacity: 1;
+  animation: spin-ring 4s linear infinite;
+}
+
+.power-ring::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--bg);
+  z-index: 0;
+}
+
+@keyframes spin-ring {
+  to { transform: rotate(360deg); }
+}
+
+/* Button itself */
+.power-btn {
+  all: unset;
+  position: relative;
+  z-index: 1;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  color: var(--off-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--t);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.power-btn:hover { transform: scale(1.05); }
+
+.power-btn.is-on {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--power-on-ring), 0 4px 18px rgba(0,0,0,0.25);
+}
+
+/* Status label */
+.power-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-family: 'Syne Mono', monospace;
+  transition: color var(--t);
+}
+
+.power-label.is-on { color: var(--accent); }
+
+/* ─── Setting block ──────────────────────────────────────────────────────── */
+
+.setting-block {
+  margin: 0 14px 0;
+  padding: 12px 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transition: background var(--t), border-color var(--t), opacity var(--t);
+}
+
+.setting-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* density buttons */
+.density-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+}
+
+.density-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-dim);
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--t);
+  text-align: center;
+}
+
+.density-btn:hover {
+  color: var(--text);
+  border-color: var(--border-focus);
+}
+
+.density-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* disabled state when mask is off */
+body.is-off .setting-block {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ─── Footnote ───────────────────────────────────────────────────────────── */
+
+.footnote {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 10px 16px 0;
+  line-height: 1.65;
+}

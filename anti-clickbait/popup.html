@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Anti-Clickbait</title>
+  <link rel="stylesheet" href="popup.css"/>
+</head>
+<body class="theme-dark">
+
+<div class="shell">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none">
+        <!-- strikethrough exclamation idea -->
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/>
+        <path d="M12 7v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="16" r="1" fill="currentColor"/>
+        <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" opacity="0.55"/>
+      </svg>
+      <span class="brand-name">Anti-Clickbait</span>
+    </div>
+    <div class="hdr-right">
+      <button class="icon-btn" id="btn-lang"><span id="lang-label">EN</span></button>
+      <button class="icon-btn" id="btn-theme">
+        <svg id="icon-sun"  viewBox="0 0 24 24" fill="none" width="14" height="14">
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <svg id="icon-moon" viewBox="0 0 24 24" fill="none" width="14" height="14" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z"
+                stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <label class="toggle-wrap">
+        <input type="checkbox" id="master-toggle" checked/>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </label>
+    </div>
+  </header>
+
+  <!-- Status strip -->
+  <div class="status-strip" id="status-strip">
+    <span class="status-dot" id="status-dot"></span>
+    <span class="status-text" id="status-text" data-i18n="statusOn">Active</span>
+    <span class="calmed-badge" id="calmed-badge">
+      <span id="calmed-count">0</span>
+      <span data-i18n="calmedLabel"> calmed</span>
+    </span>
+  </div>
+
+  <!-- Mode picker -->
+  <div class="section">
+    <p class="section-label" data-i18n="modeLabel">Intensity</p>
+    <div class="mode-grid" id="mode-grid">
+      <button class="mode-btn" data-value="case" id="mode-case">
+        <svg viewBox="0 0 20 20" fill="none" width="16" height="16">
+          <text x="2" y="15" font-family="serif" font-size="13" fill="currentColor">Aa</text>
+        </svg>
+        <span data-i18n="modeCaseTitle">Gentle</span>
+        <span class="mode-sub" data-i18n="modeCaseSub">Fix ALL-CAPS only</span>
+      </button>
+      <button class="mode-btn active" data-value="full" id="mode-full">
+        <svg viewBox="0 0 20 20" fill="none" width="16" height="16">
+          <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M7 10h6M10 7v6" stroke="currentColor" stroke-width="1.4"
+                stroke-linecap="round" transform="rotate(45 10 10)"/>
+        </svg>
+        <span data-i18n="modeFullTitle">Full</span>
+        <span class="mode-sub" data-i18n="modeFullSub">Punctuation + emojis + caps</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- What we fix -->
+  <div class="section rules-section">
+    <p class="section-label" data-i18n="rulesLabel">Rules active</p>
+    <ul class="rule-list" id="rule-list">
+      <li class="rule-item always" data-i18n="ruleAllCaps">ALL-CAPS → Sentence case</li>
+      <li class="rule-item full-only" data-i18n="rulePunct">!!! → !</li>
+      <li class="rule-item full-only" data-i18n="ruleEmoji">Emoji clusters removed</li>
+      <li class="rule-item full-only" data-i18n="ruleDeco">Decorative symbols stripped</li>
+      <li class="rule-item full-only" data-i18n="ruleClickbait">BREAKING / SON DAKİKA calmed</li>
+    </ul>
+  </div>
+
+  <p class="footnote" data-i18n="footnote">Reload tab to re-apply after changes.</p>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

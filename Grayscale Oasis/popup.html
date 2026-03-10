@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grayscale Oasis</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 data-tr="Grayscale" data-en="Grayscale">Grayscale</h1>
+            <div class="control-buttons">
+                <button class="control-btn" id="langToggle" title="Switch Language">
+                    <span class="lang-icon">TR</span>
+                </button>
+                <button class="control-btn" id="themeToggle" title="Switch Theme">
+                    <span class="theme-icon icon-sun"></span>
+                </button>
+            </div>
+        </div>
+        <div class="toggle-section">
+            <div class="toggle-item">
+                <label class="toggle-label">
+                    <span class="toggle-text" data-tr="Siyah-Beyaz Mod" data-en="B&W Mode">Siyah-Beyaz Mod</span>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="grayscaleOasis">
+                        <span class="slider"></span>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

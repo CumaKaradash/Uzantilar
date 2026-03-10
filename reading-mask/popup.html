@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading Mask</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body class="theme-dark">
+
+  <div class="shell">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none">
+          <!-- Two dark bands + lit middle -->
+          <rect x="2" y="3"  width="20" height="6"  rx="1" fill="currentColor" opacity="0.35"/>
+          <rect x="2" y="15" width="20" height="6"  rx="1" fill="currentColor" opacity="0.35"/>
+          <rect x="2" y="9"  width="20" height="6"  rx="1" fill="currentColor" opacity="0.95"/>
+          <!-- Spotlight rays -->
+          <line x1="5"  y1="9"  x2="2"  y2="6"  stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+          <line x1="19" y1="9"  x2="22" y2="6"  stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+          <line x1="5"  y1="15" x2="2"  y2="18" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+          <line x1="19" y1="15" x2="22" y2="18" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+        <span class="brand-name">Reading Mask</span>
+      </div>
+
+      <div class="header-right">
+        <button class="icon-btn" id="btn-lang">
+          <span id="lang-label">EN</span>
+        </button>
+        <button class="icon-btn" id="btn-theme">
+          <svg id="icon-sun"  viewBox="0 0 24 24" fill="none" width="14" height="14">
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                  stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+          <svg id="icon-moon" viewBox="0 0 24 24" fill="none" width="14" height="14" style="display:none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z"
+                  stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Power section -->
+    <section class="power-section">
+      <div class="power-ring" id="power-ring">
+        <button class="power-btn" id="btn-power">
+          <svg viewBox="0 0 24 24" fill="none" width="26" height="26">
+            <path d="M12 3v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M18.4 5.6A9 9 0 1 1 5.6 5.6" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" fill="none"/>
+          </svg>
+        </button>
+      </div>
+      <p class="power-label" id="power-label" data-i18n="statusOff">Inactive</p>
+    </section>
+
+    <!-- Opacity picker -->
+    <div class="setting-block">
+      <p class="setting-title" data-i18n="maskDensity">Mask density</p>
+      <div class="density-row" id="density-row">
+        <button class="density-btn" data-value="light"  data-i18n="dLight">Light</button>
+        <button class="density-btn active" data-value="medium" data-i18n="dMedium">Medium</button>
+        <button class="density-btn" data-value="dark"   data-i18n="dDark">Dark</button>
+      </div>
+    </div>
+
+    <!-- Footer note -->
+    <p class="footnote" data-i18n="hint">Hover over paragraphs after activating.</p>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+/* ─── Simple New Tab — newtab.css ───────────────────────────────────────── */
+
+/* ─── Themes ─────────────────────────────────────────────────────────────── */
+
+:root {
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 0.3s var(--ease);
+}
+
+.theme-dark {
+  --bg:               #0e0e0f;
+  --bg-noise:         rgba(255,255,255,0.012);
+  --text:             rgba(235, 232, 224, 0.92);
+  --text-placeholder: rgba(235, 232, 224, 0.18);
+  --line:             rgba(235, 232, 224, 0.12);
+  --line-focus:       rgba(235, 232, 224, 0.45);
+  --time:             rgba(235, 232, 224, 0.22);
+  --ctrl:             rgba(235, 232, 224, 0.16);
+  --ctrl-hover:       rgba(235, 232, 224, 0.55);
+  --ctrl-bg-hover:    rgba(255,255,255,0.04);
+}
+
+.theme-light {
+  --bg:               #f7f5f0;
+  --bg-noise:         rgba(0,0,0,0.015);
+  --text:             rgba(28, 25, 20, 0.88);
+  --text-placeholder: rgba(28, 25, 20, 0.2);
+  --line:             rgba(28, 25, 20, 0.1);
+  --line-focus:       rgba(28, 25, 20, 0.4);
+  --time:             rgba(28, 25, 20, 0.25);
+  --ctrl:             rgba(28, 25, 20, 0.18);
+  --ctrl-hover:       rgba(28, 25, 20, 0.6);
+  --ctrl-bg-hover:    rgba(0,0,0,0.04);
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Lato', sans-serif;
+  transition: background var(--transition), color var(--transition);
+  cursor: default;
+  user-select: none;
+}
+
+/* ─── Grain texture ──────────────────────────────────────────────────────── */
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  animation: grain-drift 8s steps(10) infinite;
+}
+
+@keyframes grain-drift {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-2%, -3%); }
+  20%       { transform: translate(3%, 1%); }
+  30%       { transform: translate(-1%, 4%); }
+  40%       { transform: translate(4%, -2%); }
+  50%       { transform: translate(-3%, 3%); }
+  60%       { transform: translate(2%, -4%); }
+  70%       { transform: translate(-4%, 2%); }
+  80%       { transform: translate(1%, -1%); }
+  90%       { transform: translate(-2%, 4%); }
+}
+
+/* ─── Time ───────────────────────────────────────────────────────────────── */
+
+.time-wrap {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+  opacity: 0;
+  animation: fade-in 1.2s var(--ease) 0.4s forwards;
+}
+
+.time {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  letter-spacing: 0.06em;
+  color: var(--time);
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.date {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--time);
+  opacity: 0.7;
+  transition: color var(--transition);
+}
+
+/* ─── Main focus area ────────────────────────────────────────────────────── */
+
+.main {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.focus-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  opacity: 0;
+  animation: focus-enter 1s var(--ease) 0.1s forwards;
+}
+
+@keyframes focus-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Focus Input ────────────────────────────────────────────────────────── */
+
+.focus-input {
+  /* Reset */
+  all: unset;
+  display: block;
+
+  /* Typography */
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.9rem, 4.5vw, 3.6rem);
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--text);
+
+  /* Layout */
+  width: clamp(280px, 60vw, 820px);
+  padding: 0 0 18px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: text;
+
+  /* Placeholder */
+  transition: color var(--transition);
+}
+
+.focus-input::placeholder {
+  color: var(--text-placeholder);
+  font-style: italic;
+}
+
+/* ─── Animated underline ─────────────────────────────────────────────────── */
+
+.focus-line {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+  position: relative;
+  transition: background var(--transition);
+}
+
+.focus-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--line-focus);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s var(--ease), background var(--transition);
+}
+
+.focus-input:focus ~ .focus-line::after,
+.focus-container.has-value .focus-line::after {
+  transform: scaleX(1);
+}
+
+/* ─── Corner controls ────────────────────────────────────────────────────── */
+
+.corner-controls {
+  position: fixed;
+  bottom: 28px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  opacity: 0;
+  animation: fade-in 1.4s var(--ease) 0.8s forwards;
+}
+
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+.ctrl-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--ctrl);
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition);
+}
+
+.ctrl-btn:hover {
+  color: var(--ctrl-hover);
+  background: var(--ctrl-bg-hover);
+}
+
+.ctrl-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.ctrl-lang-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+/* ─── Entrance stagger ───────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+  .focus-container,
+  .time-wrap,
+  .corner-controls { opacity: 1; animation: none; }
+}

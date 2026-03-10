@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focus Breath</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body data-theme="light" data-lang="en">
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <div class="logo-circle"></div>
+        </div>
+        <span class="logo-text">Focus Breath</span>
+      </div>
+
+      <div class="header-controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="Toggle language">
+          <span id="langLabel">TR</span>
+        </button>
+        <button class="ctrl-btn icon-btn" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4" fill="currentColor"/>
+            <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main toggle -->
+    <section class="card main-card">
+      <div class="card-row">
+        <div class="card-info">
+          <p class="card-title" data-i18n="enableTitle">Focus Mode</p>
+          <p class="card-sub"   data-i18n="enableSub">Scheduled breathing reminders</p>
+        </div>
+        <button class="toggle-btn" id="mainToggle" aria-label="Toggle Focus Breath">
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </button>
+      </div>
+
+      <!-- Status pill -->
+      <div class="status-pill" id="statusPill">
+        <span class="status-dot"></span>
+        <span class="status-text" data-i18n="statusOn">Active</span>
+      </div>
+    </section>
+
+    <!-- Interval selector -->
+    <section class="card">
+      <p class="section-label" data-i18n="intervalLabel">Break frequency</p>
+      <div class="interval-grid" id="intervalGrid">
+        <button class="interval-chip" data-value="15">15m</button>
+        <button class="interval-chip" data-value="30">30m</button>
+        <button class="interval-chip" data-value="45">45m</button>
+        <button class="interval-chip" data-value="60">60m</button>
+      </div>
+    </section>
+
+    <!-- Test button -->
+    <button class="test-btn" id="testBtn">
+      <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span data-i18n="testBtn">Preview break</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">Cuma Karadaş tarafından geliştirildi</p>
+      <div class="footer-buttons">
+        <button class="footer-btn" id="githubBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </button>
+        <button class="footer-btn" id="coffeeBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+            <path d="M2 21v-2h20v2H2zm0-4v-6h20v6H2zm0-8V5c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v4H2z"/>
+          </svg>
+          <span>Bir kahve ısmarlayın</span>
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

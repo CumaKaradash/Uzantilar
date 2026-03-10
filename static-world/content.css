@@ -1,0 +1,108 @@
+/*
+ * Static World — content.css
+ *
+ * Bu dosya sayfa yüklendiğinde her zaman enjekte edilir,
+ * ancak stiller yalnızca body'de .sw-active sınıfı varken devreye girer.
+ * Bu sayede JS yüklenmeden önce bile "flash" olmaz.
+ *
+ * ─── GÜNCELLEME REHBERİ ───────────────────────────────────────────────────────
+ *
+ * Yeni bir hareket türü gözlemlersen şu değerleri ekleyebilirsin:
+ *   - CSS transform geçişleri    → zaten transition: none ile yakalanıyor
+ *   - Web Animations API         → JS tarafında yakalanıyor (content.js)
+ *   - Scroll animasyonları       → scroll-behavior: auto ile yakalanıyor
+ *   - SVG SMIL animasyonları     → body.sw-active svg * bloğu ile (aşağıda)
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BÖLÜM 1 — EVRENSEL HAREKETSİZLEŞTİRME
+   Tüm CSS animasyonlarını, geçişlerini ve scroll davranışını durdurur.
+   Specificity: body.sw-active * → en yüksek uygulanabilir kapsam
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body.sw-active *,
+body.sw-active *::before,
+body.sw-active *::after {
+  /* CSS Animasyonları — @keyframes tabanlı tüm animasyonları durdur */
+  animation-play-state: paused  !important;
+  animation-duration:   0.001ms !important; /* "none" yerine 0.001ms — bazı
+                                               sayfalar "none" sonrası
+                                               animationend'i bekler */
+  animation-delay:      0s      !important;
+  animation-iteration-count: 1  !important;
+
+  /* CSS Geçişleri — hover, focus, aktif durum geçişlerini an'a indir */
+  transition-duration:  0.001ms !important;
+  transition-delay:     0s      !important;
+
+  /* Scroll davranışı — smooth scroll'u kapat */
+  scroll-behavior: auto !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BÖLÜM 2 — SVG SMIL ANİMASYONLARI
+   <animate>, <animateTransform>, <animateMotion> elementlerini durdurur.
+   SVG'nin kendi animasyon sistemi CSS'ten bağımsız çalışır.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body.sw-active svg animate,
+body.sw-active svg animateTransform,
+body.sw-active svg animateMotion,
+body.sw-active svg set,
+body.sw-active svg animateColor {
+  /* SVG SMIL animasyonlarını görünmez kıl — JS ile .pauseAnimations() da çağrılır */
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BÖLÜM 3 — VİDEO VE MEDYA
+   Video elementlerini görsel olarak dondurulmuş göster.
+   Gerçek durdurma JS tarafında .pause() ile yapılır.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body.sw-active video {
+  /* Video oynarken bile hareketsiz görünümü için:
+     object-fit korunur, ama animasyon üst katmanları dondurulur */
+}
+
+body.sw-active video[data-sw-frozen],
+body.sw-active audio[data-sw-frozen] {
+  /* JS tarafından durdurulmuş medya elementlerinin işareti */
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BÖLÜM 4 — GIF ve ANİMAYONLU GÖRSELLERİ DONDURMA
+   .gif uzantılı görseller canvas ile yakalanır (JS tarafında),
+   canvas elementi bu stillerle düzgün görüntülenir.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+canvas[data-sw-gif-freeze] {
+  /* GIF yerine yerleştirilen canvas elementinin orijinal boyutlarına uyması */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BÖLÜM 5 — MARQUEE VE TICKER ELEMENTLER
+   HTML <marquee> ve CSS ile yapılmış haber ticker'larını durdurur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body.sw-active marquee {
+  /* Marquee'nin JavaScript ile durdurulamadığı durumlarda CSS çözümü */
+  overflow: hidden !important;
+  /* marquee elementinin hareketi CSS ile kontrol edilemez doğrudan,
+     JS tarafında .stop() çağrılır */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BÖLÜM 6 — WILL-CHANGE TEMİZLEME
+   Performans için GPU katmanı oluşturan will-change değerlerini sıfırla.
+   Bu, bazı tarayıcılarda animasyonları zorla durdurmaya yardımcı olur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body.sw-active * {
+  will-change: auto !important;
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>İG Odak - Hızlı Ayarlar</title>
+    <link rel="icon" href="icons/coffee.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="popup.css" />
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <!-- Popup: simgeden hızlı erişim için minimal yönetim ekranı -->
+    <div class="container">
+      <header>
+        <h1>Odak Ayarları</h1>
+        <!-- Tema yöneltme butonu -->
+        <button id="themeToggle" class="theme-btn" title="Tema değiştir" aria-label="Tema değiştir">🌙</button>
+        <button id="langToggle" class="lang-btn" title="Dil değiştir" aria-label="Dil değiştir">TR</button>
+      </header>
+
+      <section class="card">
+        <!-- Modern toggle switch'ler -->
+        <label class="toggle">
+          <input type="checkbox" id="hideReels" />
+          <span class="slider"></span>
+          <span class="label">Reels videoları ve sekmeleri</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideExplore" />
+          <span class="slider"></span>
+          <span class="label">Keşfet sayfası ve arama</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideNotifications" />
+          <span class="slider"></span>
+          <span class="label">Bildirimler ve aktivite</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideStories" />
+          <span class="slider"></span>
+          <span class="label">Hikayeler bölümü</span>
+        </label>
+      </section>
+
+      <footer class="footer">
+        <span id="footerText">Cuma Karadash tarafından geliştirildi</span>
+        <div class="links">
+          <button id="githubBtn" class="link-btn" title="GitHub">GitHub</button>
+          <button id="bmcBtn" class="link-btn" title="Bir kahve ısmarla">Bir kahve ısmarla</button>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

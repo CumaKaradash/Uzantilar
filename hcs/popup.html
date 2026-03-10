@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>High-Contrast Sovereign</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body data-theme="light" data-lang="en">
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
+          <!-- Eye with contrast circle -->
+          <ellipse cx="14" cy="14" rx="11" ry="7" stroke="currentColor" stroke-width="1.8"/>
+          <circle  cx="14" cy="14" r="3.5" fill="currentColor"/>
+          <!-- Half fill for contrast symbolism -->
+          <path d="M14 10.5 A3.5 3.5 0 0 1 14 17.5 Z" fill="var(--bg)" opacity="0.8"/>
+        </svg>
+        <span class="logo-text">HC Sovereign</span>
+      </div>
+
+      <div class="header-controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="Toggle language">
+          <span id="langLabel">TR</span>
+        </button>
+        <button class="ctrl-btn icon-btn" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4" fill="currentColor"/>
+            <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main toggle -->
+    <section class="card">
+      <div class="card-row">
+        <div class="card-info">
+          <p class="card-title" data-i18n="toggleTitle">High Contrast</p>
+          <p class="card-sub"   data-i18n="toggleSub">WCAG AAA on every page</p>
+        </div>
+        <button class="toggle-btn" id="mainToggle" aria-label="Toggle High-Contrast Sovereign">
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </button>
+      </div>
+      <div class="status-pill" id="statusPill">
+        <span class="status-dot"></span>
+        <span class="status-text" data-i18n="statusOn">Active</span>
+      </div>
+    </section>
+
+    <!-- Mode selector -->
+    <section class="card mode-card">
+      <p class="section-label" data-i18n="modeLabel">Contrast mode</p>
+      <div class="mode-group" id="modeGroup">
+
+        <!-- Yellow on Black -->
+        <button class="mode-btn" data-mode="yellow-black" aria-pressed="true">
+          <span class="mode-preview yb-preview">
+            <span class="preview-line"></span>
+            <span class="preview-line short"></span>
+          </span>
+          <span class="mode-info">
+            <span class="mode-name" data-i18n="modeYB">Yellow / Black</span>
+            <span class="mode-ratio">19.98:1 · AAA</span>
+          </span>
+        </button>
+
+        <!-- Inverted -->
+        <button class="mode-btn" data-mode="inverted" aria-pressed="false">
+          <span class="mode-preview inv-preview">
+            <span class="preview-line"></span>
+            <span class="preview-line short"></span>
+          </span>
+          <span class="mode-info">
+            <span class="mode-name" data-i18n="modeInv">Inverted</span>
+            <span class="mode-ratio" data-i18n="modeInvSub">Colors reversed</span>
+          </span>
+        </button>
+
+        <!-- Grayscale -->
+        <button class="mode-btn" data-mode="grayscale" aria-pressed="false">
+          <span class="mode-preview gs-preview">
+            <span class="preview-line"></span>
+            <span class="preview-line short"></span>
+          </span>
+          <span class="mode-info">
+            <span class="mode-name" data-i18n="modeGs">Grayscale</span>
+            <span class="mode-ratio" data-i18n="modeGsSub">+25% contrast</span>
+          </span>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p data-i18n="footerText">See every page, clearly.</p>
+    </footer>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

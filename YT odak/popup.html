@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Odak - Hızlı Ayarlar</title>
+    <link rel="icon" href="icons/coffee.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="popup.css" />
+    <script defer src="popup.js"></script>
+  </head>
+  <body>
+    <!-- Popup: simgeden hızlı erişim için minimal yönetim ekranı -->
+    <div class="container">
+      <header>
+        <h1>Odak Ayarları</h1>
+        <!-- Tema yöneltme butonu -->
+        <button id="themeToggle" class="theme-btn" title="Tema değiştir" aria-label="Tema değiştir">🌙</button>
+        <button id="langToggle" class="lang-btn" title="Dil değiştir" aria-label="Dil değiştir">TR</button>
+      </header>
+
+      <section class="card">
+        <!-- Modern toggle switch'ler -->
+        <label class="toggle">
+          <input type="checkbox" id="hideHome" />
+          <span class="slider"></span>
+          <span class="label">Anasayfa önerileri</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideWatchRecommended" />
+          <span class="slider"></span>
+          <span class="label">Video yanı/altı öneriler</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideShorts" />
+          <span class="slider"></span>
+          <span class="label">Shorts videoları ve sekmeleri</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideComments" />
+          <span class="slider"></span>
+          <span class="label">Yorumlar bölümü</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideEndScreen" />
+          <span class="slider"></span>
+          <span class="label">Videonun sonundaki öneri kartları</span>
+        </label>
+      </section>
+
+      <footer class="footer">
+        <span id="footerText">Cuma Karadash tarafından geliştirildi</span>
+        <div class="links">
+          <button id="githubBtn" class="link-btn" title="GitHub">GitHub</button>
+          <button id="bmcBtn" class="link-btn" title="Bir kahve ısmarla">Bir kahve ısmarla</button>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

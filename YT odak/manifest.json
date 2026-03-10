@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Odak",
+  "description": "YouTube'daki dikkat dağıtıcı unsurları gizleyerek daha odaklı bir izleme deneyimi sunar.",
+  "version": "1.0.0",
+  "action": {
+    "default_title": "YouTube Odak",
+    "default_popup": "popup.html",
+    "default_icon": "icons/coffee.png"
+  },
+  "icons": {
+    "16": "icons/coffee.png",
+    "32": "icons/coffee.png",
+    "48": "icons/coffee.png",
+    "128": "icons/coffee.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

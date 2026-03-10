@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Sovereign Scroll",
+  "version": "1.0.0",
+  "description": "Dijital İrade ve Odak Asistanı - Sonsuz kaydırma tuzağından kurtulun.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.instagram.com/*",
+    "*://*.tiktok.com/*",
+    "*://*.twitter.com/*",
+    "*://*.x.com/*",
+    "*://*.facebook.com/*",
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.instagram.com/*",
+        "*://*.tiktok.com/*",
+        "*://*.twitter.com/*",
+        "*://*.x.com/*",
+        "*://*.facebook.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Sovereign Scroll"
+  },
+  "icons": {
+    "16": "icons/coffee.png",
+    "48": "icons/coffee.png",
+    "128": "icons/coffee.png"
+  }
+}

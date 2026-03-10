@@ -1,0 +1,193 @@
+/*
+ * News Diet — content.css
+ * Applied only when the body has [data-news-diet="on"].
+ * This keeps everything scoped and togglable without DOM manipulation.
+ */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SECTION 1 · STRUCTURAL NOISE — Sidebars, related widgets, promotions
+   ───────────────────────────────────────────────────────────────────────── */
+
+body[data-news-diet="on"] aside,
+body[data-news-diet="on"] [class*="sidebar"],
+body[data-news-diet="on"] [class*="side-bar"],
+body[data-news-diet="on"] [id*="sidebar"],
+body[data-news-diet="on"] [id*="side-bar"],
+
+/* Related / recommended content */
+body[data-news-diet="on"] [class*="related"],
+body[data-news-diet="on"] [class*="recommended"],
+body[data-news-diet="on"] [class*="suggestions"],
+body[data-news-diet="on"] [class*="more-stories"],
+body[data-news-diet="on"] [class*="also-read"],
+body[data-news-diet="on"] [class*="you-may"],
+body[data-news-diet="on"] [class*="read-more"],
+body[data-news-diet="on"] [class*="keep-reading"],
+body[data-news-diet="on"] [class*="further-reading"],
+body[data-news-diet="on"] [id*="related"],
+body[data-news-diet="on"] [id*="recommended"],
+
+/* Trending / popular */
+body[data-news-diet="on"] [class*="trending"],
+body[data-news-diet="on"] [class*="popular"],
+body[data-news-diet="on"] [class*="most-read"],
+body[data-news-diet="on"] [class*="most-shared"],
+body[data-news-diet="on"] [class*="most-viewed"],
+body[data-news-diet="on"] [id*="trending"],
+body[data-news-diet="on"] [id*="popular"],
+
+/* Breaking news banners and tickers */
+body[data-news-diet="on"] [class*="breaking"],
+body[data-news-diet="on"] [class*="breaking-news"],
+body[data-news-diet="on"] [class*="news-ticker"],
+body[data-news-diet="on"] [class*="ticker"],
+body[data-news-diet="on"] [class*="live-blog"],
+body[data-news-diet="on"] [class*="live-update"],
+body[data-news-diet="on"] [id*="breaking"],
+
+/* Newsletters / subscriptions banners */
+body[data-news-diet="on"] [class*="newsletter"],
+body[data-news-diet="on"] [class*="subscribe"],
+body[data-news-diet="on"] [class*="subscription"],
+body[data-news-diet="on"] [class*="sign-up"],
+body[data-news-diet="on"] [class*="signup"],
+body[data-news-diet="on"] [class*="email-wall"],
+body[data-news-diet="on"] [id*="newsletter"],
+body[data-news-diet="on"] [id*="subscribe"],
+
+/* Ads and promotional widgets */
+body[data-news-diet="on"] [class*="advertisement"],
+body[data-news-diet="on"] [class*="sponsored"],
+body[data-news-diet="on"] [class*="promo"],
+body[data-news-diet="on"] [class*="outbrain"],
+body[data-news-diet="on"] [class*="taboola"],
+body[data-news-diet="on"] [class*="mgid"],
+body[data-news-diet="on"] [class*="revcontent"],
+body[data-news-diet="on"] [id*="outbrain"],
+body[data-news-diet="on"] [id*="taboola"],
+body[data-news-diet="on"] [id*="mgid"],
+body[data-news-diet="on"] [class*="widget"],
+body[data-news-diet="on"] [class*="ad-unit"],
+body[data-news-diet="on"] [class*="ad-slot"],
+body[data-news-diet="on"] [class*="advert"],
+
+/* Social share bars */
+body[data-news-diet="on"] [class*="share-bar"],
+body[data-news-diet="on"] [class*="social-share"],
+body[data-news-diet="on"] [class*="sharing"],
+body[data-news-diet="on"] [class*="socialbar"],
+
+/* Comments sections */
+body[data-news-diet="on"] [class*="comments"],
+body[data-news-diet="on"] [class*="comment-section"],
+body[data-news-diet="on"] [id*="comments"],
+body[data-news-diet="on"] [id*="disqus"],
+
+/* Sticky/floating overlays */
+body[data-news-diet="on"] [class*="sticky-ad"],
+body[data-news-diet="on"] [class*="fixed-footer"],
+body[data-news-diet="on"] [class*="floating"],
+body[data-news-diet="on"] [class*="sticky-banner"],
+body[data-news-diet="on"] [class*="interstitial"],
+body[data-news-diet="on"] [class*="paywall"],
+body[data-news-diet="on"] [class*="overlay"],
+body[data-news-diet="on"] [class*="modal"]:not([role="dialog"]),
+
+/* Site-specific — major news sites */
+/* BBC */
+body[data-news-diet="on"] .ssrcss-1lcm2yo-Aside,
+body[data-news-diet="on"] [data-component="topic-list"],
+/* CNN */
+body[data-news-diet="on"] .zn-body__read-more,
+body[data-news-diet="on"] .el__storyelement--standard,
+/* NYT */
+body[data-news-diet="on"] .trending-module,
+body[data-news-diet="on"] .recirculation,
+/* Guardian */
+body[data-news-diet="on"] .js-aside,
+body[data-news-diet="on"] .submeta,
+/* Reuters */
+body[data-news-diet="on"] [class*="RelatedCoverage"],
+body[data-news-diet="on"] [class*="PromoBanner"],
+/* Milliyet / Hurriyet / Turkish sites */
+body[data-news-diet="on"] .son-dakika,
+body[data-news-diet="on"] .haber-listesi,
+body[data-news-diet="on"] .reklam,
+body[data-news-diet="on"] [class*="son-dakika"],
+body[data-news-diet="on"] [class*="reklam"]
+{
+  display: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SECTION 2 · TYPOGRAPHY CALM — Tame sensational headlines
+   ───────────────────────────────────────────────────────────────────────── */
+
+body[data-news-diet="on"] h1,
+body[data-news-diet="on"] h2,
+body[data-news-diet="on"] h3,
+body[data-news-diet="on"] h4,
+body[data-news-diet="on"] h5,
+body[data-news-diet="on"] h6 {
+  text-transform: none !important;
+  font-weight:    500  !important;
+  letter-spacing: normal !important;
+  line-height:    1.35 !important;
+}
+
+/* Cap headline sizes so nothing SCREAMS */
+body[data-news-diet="on"] h1 { font-size: min(1.75rem, 26px) !important; }
+body[data-news-diet="on"] h2 { font-size: min(1.4rem,  22px) !important; }
+body[data-news-diet="on"] h3 { font-size: min(1.2rem,  19px) !important; }
+body[data-news-diet="on"] h4,
+body[data-news-diet="on"] h5,
+body[data-news-diet="on"] h6 { font-size: min(1rem,    16px) !important; }
+
+/* Suppress ALLCAPS on links that act as clickbait buttons */
+body[data-news-diet="on"] a[class*="title"],
+body[data-news-diet="on"] a[class*="headline"],
+body[data-news-diet="on"] [class*="headline"] {
+  text-transform: none !important;
+  font-weight:    normal !important;
+}
+
+/* Mute overly vivid "BREAKING" badge colours */
+body[data-news-diet="on"] [class*="breaking"],
+body[data-news-diet="on"] [class*="BREAKING"],
+body[data-news-diet="on"] [class*="live"],
+body[data-news-diet="on"] [class*="urgent"] {
+  background: transparent !important;
+  color: inherit        !important;
+  border: none          !important;
+  animation: none       !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SECTION 3 · READING FOCUS — Reduce visual clutter in the main body
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Cap banner images so they don't take up the full viewport */
+body[data-news-diet="on"] figure img,
+body[data-news-diet="on"] .article-image img,
+body[data-news-diet="on"] .hero img {
+  max-height: 420px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+}
+
+/* Remove animated GIF-like attention-grabbers */
+body[data-news-diet="on"] [class*="animation"],
+body[data-news-diet="on"] [class*="marquee"],
+body[data-news-diet="on"] marquee {
+  animation:          none !important;
+  -webkit-animation:  none !important;
+}
+
+/* Tone down background colours on the main content container */
+body[data-news-diet="on"] article,
+body[data-news-diet="on"] [role="main"],
+body[data-news-diet="on"] main {
+  max-width: 760px !important;
+  margin-left:  auto !important;
+  margin-right: auto !important;
+}

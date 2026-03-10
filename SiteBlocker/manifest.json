@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Site Engelleyici",
+  "version": "1.0",
+  "description": "Dikkat dağıtıcı siteleri engelleyerek odaklanmanızı sağlar.",
+  "icons": {
+    "16": "icons/coffee.png",
+    "32": "icons/coffee.png",
+    "48": "icons/coffee.png",
+    "128": "icons/coffee.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Site Engelleyiciyi Aç",
+    "default_icon": "icons/coffee.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

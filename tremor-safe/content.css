@@ -1,0 +1,184 @@
+/*
+ * Tremor-Safe Click — content.css
+ *
+ * ─── NASIL ÇALIŞIR ────────────────────────────────────────────────────────────
+ *
+ * Sayfa düzenini (layout) bozmadan tıklama alanını genişletmek için
+ * CSS ::after pseudo-elementi kullanıyoruz.
+ *
+ * Teknik:
+ *   1. Hedef elemente  → position: relative  (pseudo-element'e referans noktası)
+ *   2. ::after'a       → position: absolute  (layout akışının dışında)
+ *                      → inset: -Xpx         (dört yönde taşma miktarı)
+ *                      → content: ''         (görünmez ama tıklanabilir alan
+ *                      → z-index: 0          (öğenin mevcut içeriğini örtmez,
+ *                                             ama çevre boşluğu tıklanabilir)
+ *
+ * Boyut sınıfları body'e eklenir → CSS cascade ile ::after boyutu değişir.
+ * Üç boyut:
+ *   .ts-size-sm  → -10px  (küçük genişleme)
+ *   .ts-size-md  → -20px  (orta genişleme)   ← varsayılan
+ *   .ts-size-lg  → -30px  (büyük genişleme)
+ *
+ * ─── GÜNCELLEME REHBERİ ───────────────────────────────────────────────────────
+ *
+ * Yeni bir element türü eklemek istersen:
+ *   1. Aşağıdaki "HEDEF ELEMENTLER" bölümüne selector ekle
+ *   2. ::after pseudo-selector'ına da aynı elementi ekle
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+/* ─── HEDEF ELEMENTLER — position: relative ─────────────────────────────────
+ *
+ * Bu sınıf yalnızca .ts-active body'de bulunduğunda uygulanır.
+ * position: relative zaten verilmiş elementler etkilenmez (specificity).
+ *
+ * Kapsanan elementler:
+ *   a              → tüm linkler
+ *   button         → tüm butonlar
+ *   input[type="button"]   → eski stil butonlar
+ *   input[type="submit"]   → form gönder butonları
+ *   input[type="reset"]    → form sıfırlama butonları
+ *   input[type="checkbox"] → onay kutuları
+ *   input[type="radio"]    → radyo butonları
+ *   [role="button"]        → ARIA buton rolleri
+ *   [role="link"]          → ARIA link rolleri
+ *   [role="menuitem"]      → menü öğeleri
+ *   [role="tab"]           → sekme öğeleri
+ *   select                 → açılır menüler
+ */
+
+body.ts-active a,
+body.ts-active button,
+body.ts-active input[type="button"],
+body.ts-active input[type="submit"],
+body.ts-active input[type="reset"],
+body.ts-active input[type="checkbox"],
+body.ts-active input[type="radio"],
+body.ts-active [role="button"],
+body.ts-active [role="link"],
+body.ts-active [role="menuitem"],
+body.ts-active [role="tab"],
+body.ts-active select {
+  position: relative !important;
+  /* z-index: 0 ile kendi stacking context'ini oluştur,
+     böylece ::after z-index kontrolü çalışır */
+  isolation: isolate;
+}
+
+/* ─── ::AFTER — GÖRÜNMEz GENİŞLETİLMİŞ TIKLANMA ALANI ────────────────────
+ *
+ * Bu pseudo-element sayfa akışının dışındadır (position: absolute).
+ * Boyutu değiştirmek için sadece inset değerini güncelle.
+ * pointer-events: auto → tıklamaları iletir.
+ * background: transparent → tamamen görünmez.
+ */
+
+body.ts-active a::after,
+body.ts-active button::after,
+body.ts-active input[type="button"]::after,
+body.ts-active input[type="submit"]::after,
+body.ts-active input[type="reset"]::after,
+body.ts-active input[type="checkbox"]::after,
+body.ts-active input[type="radio"]::after,
+body.ts-active [role="button"]::after,
+body.ts-active [role="link"]::after,
+body.ts-active [role="menuitem"]::after,
+body.ts-active [role="tab"]::after,
+body.ts-active select::after {
+  content: '';
+  position: absolute;
+  /* Varsayılan boyut: orta (20px) — .ts-size-* sınıfları bunu override eder */
+  inset: -20px;
+  /* z-index: -1 değil, 0 — elementin içeriğini örtmeden
+     çevre alana tıklama iletir. Bazı sayfalar için 1 gerekebilir. */
+  z-index: 0;
+  pointer-events: auto;
+  background: transparent;
+  /* Geliştirici modunda görsel hata ayıklama için:
+     background: rgba(255,0,0,0.1); /* Bu satırı açarak alanı görebilirsin */
+  border-radius: inherit; /* Yuvarlak köşeleri koru */
+  cursor: pointer;
+}
+
+/* ─── BOYUT SINIFLARI ────────────────────────────────────────────────────────
+ *
+ * Popup'tan seçilen boyuta göre body'e bu sınıflardan biri eklenir.
+ * Daha düşük özgüllük → yukarıdaki inset: -20px'i override eder.
+ */
+
+/* Küçük: 10px genişleme — hafif tremor veya küçük ekranlar için */
+body.ts-active.ts-size-sm a::after,
+body.ts-active.ts-size-sm button::after,
+body.ts-active.ts-size-sm input[type="button"]::after,
+body.ts-active.ts-size-sm input[type="submit"]::after,
+body.ts-active.ts-size-sm input[type="reset"]::after,
+body.ts-active.ts-size-sm input[type="checkbox"]::after,
+body.ts-active.ts-size-sm input[type="radio"]::after,
+body.ts-active.ts-size-sm [role="button"]::after,
+body.ts-active.ts-size-sm [role="link"]::after,
+body.ts-active.ts-size-sm [role="menuitem"]::after,
+body.ts-active.ts-size-sm [role="tab"]::after,
+body.ts-active.ts-size-sm select::after {
+  inset: -10px;
+}
+
+/* Orta: 20px genişleme — varsayılan (::after'daki inset: -20px ile örtüşür) */
+body.ts-active.ts-size-md a::after,
+body.ts-active.ts-size-md button::after,
+body.ts-active.ts-size-md input[type="button"]::after,
+body.ts-active.ts-size-md input[type="submit"]::after,
+body.ts-active.ts-size-md input[type="reset"]::after,
+body.ts-active.ts-size-md input[type="checkbox"]::after,
+body.ts-active.ts-size-md input[type="radio"]::after,
+body.ts-active.ts-size-md [role="button"]::after,
+body.ts-active.ts-size-md [role="link"]::after,
+body.ts-active.ts-size-md [role="menuitem"]::after,
+body.ts-active.ts-size-md [role="tab"]::after,
+body.ts-active.ts-size-md select::after {
+  inset: -20px;
+}
+
+/* Büyük: 30px genişleme — ağır tremor veya büyük ekranlar için */
+body.ts-active.ts-size-lg a::after,
+body.ts-active.ts-size-lg button::after,
+body.ts-active.ts-size-lg input[type="button"]::after,
+body.ts-active.ts-size-lg input[type="submit"]::after,
+body.ts-active.ts-size-lg input[type="reset"]::after,
+body.ts-active.ts-size-lg input[type="checkbox"]::after,
+body.ts-active.ts-size-lg input[type="radio"]::after,
+body.ts-active.ts-size-lg [role="button"]::after,
+body.ts-active.ts-size-lg [role="link"]::after,
+body.ts-active.ts-size-lg [role="menuitem"]::after,
+body.ts-active.ts-size-lg [role="tab"]::after,
+body.ts-active.ts-size-lg select::after {
+  inset: -30px;
+}
+
+/* ─── OVERFLOw YÖNETİMİ ─────────────────────────────────────────────────────
+ *
+ * Bazı sayfalarda taşan ::after elementleri scrollbar oluşturabilir.
+ * Bu durumda overflow: hidden olan container elementlerinde ::after
+ * kırpılır — bu beklenen davranıştır.
+ *
+ * Eğer belirli bir sayfada overflow sorunu çıkarsa, o sitenin
+ * container selectorunu buraya ekleyebilirsin:
+ *   .site-specific-container { overflow: visible !important; }
+ */
+
+/* ─── HOVER VİZÜEL İPUCU (opsiyonel) ────────────────────────────────────────
+ *
+ * Genişletilmiş alana girildiğinde ana element hafifçe vurgulanır.
+ * Bu, kullanıcının tıklama alanını hissetmesine yardımcı olur.
+ * İstersen bu bloğu tamamen kaldırabilirsin.
+ */
+
+body.ts-active a:hover,
+body.ts-active button:hover,
+body.ts-active [role="button"]:hover {
+  outline: 2px solid rgba(59, 130, 246, 0.35) !important;
+  outline-offset: 3px;
+  border-radius: 3px;
+  transition: outline 120ms ease;
+}

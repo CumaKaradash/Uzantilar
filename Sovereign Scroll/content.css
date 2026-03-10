@@ -1,0 +1,99 @@
+/* Sovereign Scroll - Content Styles */
+/* Ultra minimal theme with pure black */
+
+.sovereign-scroll-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.98) !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    color: white !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    animation: fadeIn 0.2s ease-out !important;
+}
+
+.sovereign-scroll-message {
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+    text-align: center !important;
+    max-width: 320px !important;
+    line-height: 1.4 !important;
+    font-weight: 400 !important;
+    opacity: 0 !important;
+    animation: slideUp 0.4s ease-out 0.1s forwards !important;
+}
+
+.sovereign-scroll-button {
+    background: #111111 !important;
+    border: 1px solid #222222 !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    transition: all 0.2s ease !important;
+    min-width: 100px !important;
+    opacity: 0 !important;
+    animation: slideUp 0.4s ease-out 0.3s forwards !important;
+    outline: none !important;
+}
+
+.sovereign-scroll-button:hover {
+    background: #222222 !important;
+    border-color: #333333 !important;
+    transform: translateY(-1px) !important;
+}
+
+.sovereign-scroll-button:active {
+    transform: translateY(0) !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Platform-specific adjustments */
+.instagram .sovereign-scroll-overlay {
+    background: rgba(0, 0, 0, 0.99) !important;
+}
+
+.tiktok .sovereign-scroll-overlay {
+    background: rgba(0, 0, 0, 0.98) !important;
+}
+
+.twitter .sovereign-scroll-overlay,
+.x .sovereign-scroll-overlay {
+    background: rgba(0, 0, 0, 0.98) !important;
+}
+
+.facebook .sovereign-scroll-overlay {
+    background: rgba(0, 0, 0, 0.98) !important;
+}
+
+.youtube .sovereign-scroll-overlay {
+    background: rgba(0, 0, 0, 0.98) !important;
+}

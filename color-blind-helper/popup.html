@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Color Blind Helper</title>
+  <link rel="stylesheet" href="popup.css"/>
+</head>
+<body class="theme-dark">
+
+<div class="shell">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <!-- Eye with spectrum fill -->
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none">
+        <ellipse cx="12" cy="12" rx="9" ry="6" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="12" cy="12" r="2.8" fill="currentColor" opacity="0.8"/>
+        <circle cx="12" cy="12" r="1.2" fill="var(--bg)" opacity="0.9"/>
+        <!-- spectrum arc inside eye -->
+        <path d="M9 11.5 Q12 9 15 11.5" stroke="url(#hdr-grad)" stroke-width="1.2"
+              stroke-linecap="round" fill="none"/>
+      </svg>
+      <defs>
+        <linearGradient id="hdr-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#f87171"/>
+          <stop offset="50%"  stop-color="#4ade80"/>
+          <stop offset="100%" stop-color="#60a5fa"/>
+        </linearGradient>
+      </defs>
+      <span class="brand-name">Color Blind Helper</span>
+    </div>
+
+    <div class="hdr-right">
+      <button class="icon-btn" id="btn-lang"><span id="lang-label">EN</span></button>
+      <button class="icon-btn" id="btn-theme">
+        <svg id="icon-sun"  viewBox="0 0 24 24" fill="none" width="14" height="14">
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <svg id="icon-moon" viewBox="0 0 24 24" fill="none" width="14" height="14" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z"
+                stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <label class="toggle-wrap">
+        <input type="checkbox" id="master-toggle"/>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </label>
+    </div>
+  </header>
+
+  <!-- Status -->
+  <div class="status-bar" id="status-bar">
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status-text" data-i18n="statusOff">Filter off</span>
+    <span class="active-filter-label" id="active-filter-label"></span>
+  </div>
+
+  <!-- Color simulation preview strip -->
+  <div class="preview-strip" id="preview-strip" aria-hidden="true">
+    <div class="swatch" style="background:#e53e3e"></div>
+    <div class="swatch" style="background:#dd6b20"></div>
+    <div class="swatch" style="background:#d69e2e"></div>
+    <div class="swatch" style="background:#38a169"></div>
+    <div class="swatch" style="background:#3182ce"></div>
+    <div class="swatch" style="background:#805ad5"></div>
+    <div class="swatch" style="background:#d53f8c"></div>
+    <div class="swatch" style="background:#e53e3e"></div>
+  </div>
+  <p class="preview-label" data-i18n="previewLabel">Color sample preview</p>
+
+  <!-- CVD Type Selector -->
+  <div class="section">
+    <p class="section-label" data-i18n="filterLabel">Vision type</p>
+    <div class="type-grid" id="type-grid">
+
+      <label class="type-card" data-value="protanopia">
+        <input type="radio" name="cvd" value="protanopia"/>
+        <div class="type-swatch-row">
+          <span class="ts" style="background:#e53e3e"></span>
+          <span class="ts" style="background:#38a169"></span>
+          <span class="ts" style="background:#3182ce"></span>
+        </div>
+        <span class="type-name" data-i18n="typeProtan">Protanopia</span>
+        <span class="type-desc" data-i18n="typeProtanDesc">Red blind</span>
+      </label>
+
+      <label class="type-card" data-value="deuteranopia">
+        <input type="radio" name="cvd" value="deuteranopia"/>
+        <div class="type-swatch-row">
+          <span class="ts" style="background:#d69e2e"></span>
+          <span class="ts" style="background:#38a169"></span>
+          <span class="ts" style="background:#3182ce"></span>
+        </div>
+        <span class="type-name" data-i18n="typeDeuteran">Deuteranopia</span>
+        <span class="type-desc" data-i18n="typeDeuteranDesc">Green blind</span>
+      </label>
+
+      <label class="type-card" data-value="tritanopia">
+        <input type="radio" name="cvd" value="tritanopia"/>
+        <div class="type-swatch-row">
+          <span class="ts" style="background:#e53e3e"></span>
+          <span class="ts" style="background:#3182ce"></span>
+          <span class="ts" style="background:#d53f8c"></span>
+        </div>
+        <span class="type-name" data-i18n="typeTritan">Tritanopia</span>
+        <span class="type-desc" data-i18n="typeTritanDesc">Blue blind</span>
+      </label>
+
+      <label class="type-card" data-value="achromatopsia">
+        <input type="radio" name="cvd" value="achromatopsia"/>
+        <div class="type-swatch-row">
+          <span class="ts" style="background:#888"></span>
+          <span class="ts" style="background:#aaa"></span>
+          <span class="ts" style="background:#555"></span>
+        </div>
+        <span class="type-name" data-i18n="typeAchroma">Achromatopsia</span>
+        <span class="type-desc" data-i18n="typeAchromaDesc">No color</span>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- Info note -->
+  <p class="footnote" data-i18n="footnote">Matrices from Machado et al. (2009). Zero layout impact.</p>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

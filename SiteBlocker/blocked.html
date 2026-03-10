@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erişim Engellendi</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #0f172a; /* Dark arka plan */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      text-align: center;
+      color: #f1f5f9;
+    }
+    
+    .alert-container {
+      background: #1e293b;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(239, 68, 68, 0.2);
+      border-top: 6px solid #ef4444; /* Kırmızı üst çizgi */
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #dc2626;
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .icon {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #475569;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="alert-container">
+    <div class="icon">⚠️</div>
+    <h1>Erişim Engellendi!</h1>
+    <p>Bu web sitesi, odaklanmanızı artırmak için <b>Site Engelleyici</b> eklentiniz tarafından engellenmiştir.</p>
+    <a href="#" class="btn" id="closeTabBtn">İşine Geri Dön Sekmeyi Kapat</a>
+  </div>
+
+  <script src="blocked.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── VARIABLES ────────────────────────────────────────────────────────────── */
+:root {
+  --radius:      14px;
+  --radius-sm:   10px;
+  --radius-pill: 999px;
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --dur:         180ms;
+  --font:        'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg:              #f6f5f2;
+  --surface:         #ffffff;
+  --surface-alt:     #edecea;
+  --border:          rgba(0,0,0,0.07);
+  --text-1:          #1a1714;
+  --text-2:          #6b6760;
+  --text-3:          #aaa8a3;
+  --accent:          #e8a020;
+  --beam-color:      rgba(255, 210, 60, 0.85);
+  --toggle-off:      #d6d3ce;
+  --toggle-on:       #e8a020;
+  --shadow:          0 1px 8px rgba(0,0,0,0.07);
+  --status-on-bg:    #fef3dc;
+  --status-on-dot:   #e8a020;
+  --status-on-text:  #a06800;
+  --status-off-bg:   #f3eeea;
+  --status-off-dot:  #c0b8b0;
+  --status-off-text: #888078;
+}
+
+[data-theme="dark"] {
+  --bg:              #111318;
+  --surface:         #1c1f28;
+  --surface-alt:     #262930;
+  --border:          rgba(255,255,255,0.06);
+  --text-1:          #e8eaf2;
+  --text-2:          #8a8e9a;
+  --text-3:          #44475a;
+  --accent:          #f0c040;
+  --beam-color:      rgba(255, 210, 60, 0.80);
+  --toggle-off:      #33363f;
+  --toggle-on:       #f0c040;
+  --shadow:          0 2px 14px rgba(0,0,0,0.5);
+  --status-on-bg:    rgba(240,192,64,0.12);
+  --status-on-dot:   #f0c040;
+  --status-on-text:  #f5d580;
+  --status-off-bg:   rgba(255,255,255,0.04);
+  --status-off-dot:  #44475a;
+  --status-off-text: #6b6e7a;
+}
+
+/* ── RESET ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { width: 300px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-1);
+  width: 300px;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+  -webkit-font-smoothing: antialiased;
+}
+button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+ul { list-style: none; }
+
+/* ── CONTAINER ────────────────────────────────────────────────────────────── */
+.container {
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── HEADER ───────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.logo-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--text-1);
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--text-1);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ctrl-btn {
+  height: 27px;
+  min-width: 27px;
+  padding: 0 9px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-alt);
+  color: var(--text-2);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  border: 1px solid var(--border);
+  transition: background var(--dur), color var(--dur), transform 80ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ctrl-btn:hover  { background: var(--surface); color: var(--text-1); }
+.ctrl-btn:active { transform: scale(0.91); }
+
+.icon-btn { padding: 0; }
+.icon-btn svg { width: 13px; height: 13px; }
+
+[data-theme="light"] .icon-moon { display: none; }
+[data-theme="dark"]  .icon-sun  { display: none; }
+
+/* ── CARD ─────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 14px 15px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text-1);
+}
+
+.card-sub {
+  font-size: 11px;
+  color: var(--text-2);
+  margin-top: 2px;
+}
+
+/* ── TOGGLE ───────────────────────────────────────────────────────────────── */
+.toggle-btn { flex-shrink: 0; }
+
+.toggle-track {
+  display: block;
+  width: 44px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: var(--toggle-off);
+  position: relative;
+  transition: background 250ms var(--ease);
+}
+
+.toggle-thumb {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toggle-btn.active .toggle-track { background: var(--toggle-on); }
+.toggle-btn.active .toggle-thumb { transform: translateX(20px); }
+
+/* ── STATUS PILL ──────────────────────────────────────────────────────────── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--status-on-bg);
+  width: fit-content;
+  transition: background var(--dur);
+}
+.status-pill.off { background: var(--status-off-bg); }
+
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--status-on-dot);
+  flex-shrink: 0;
+  transition: background var(--dur);
+  /* Aktif durumdayken hafif nabız */
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+.status-pill.off .status-dot {
+  background: var(--status-off-dot);
+  animation: none;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.status-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--status-on-text);
+  transition: color var(--dur);
+}
+.status-pill.off .status-text { color: var(--status-off-text); }
+
+/* ── SECTION LABEL ────────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-3);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* ── FEATURE LIST ─────────────────────────────────────────────────────────── */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.feat-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  color: var(--text-1);
+}
+
+/* Beam icon — küçük yatay şerit */
+.beam-icon {
+  position: relative;
+  overflow: hidden;
+}
+.beam-icon::after {
+  content: '';
+  position: absolute;
+  inset: 30% 0;
+  background: var(--beam-color);
+  border-radius: 2px;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding-top: 2px;
+}
+.footer p {
+  font-size: 10.5px;
+  color: var(--text-3);
+  font-style: italic;
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Odak - Ayarlar</title>
+    <link rel="stylesheet" href="options.css" />
+    <script defer src="options.js"></script>
+  </head>
+  <body>
+    <!-- Basit, modern ve anlaşılır ayarlar arayüzü -->
+    <div class="container">
+      <header>
+        <h1>YouTube Odak</h1>
+        <p>Dikkat dağıtıcı bileşenleri gizlemek için tercihlerinizi seçin.</p>
+      </header>
+
+      <section class="card">
+        <h2>Gizlenecek Unsurlar</h2>
+
+        <!-- Her özellik için ayrı toggle -->
+        <label class="toggle">
+          <input type="checkbox" id="hideHome" />
+          <span class="slider"></span>
+          <span class="label">Anasayfa önerileri</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideWatchRecommended" />
+          <span class="slider"></span>
+          <span class="label">Video yanı/altı öneriler</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideShorts" />
+          <span class="slider"></span>
+          <span class="label">Shorts videoları ve sekmeleri</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideComments" />
+          <span class="slider"></span>
+          <span class="label">Yorumlar bölümü</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideEndScreen" />
+          <span class="slider"></span>
+          <span class="label">Videonun sonundaki öneri kartları</span>
+        </label>
+      </section>
+
+      <footer>
+        <p>Tercihleriniz otomatik kaydedilir ve anında uygulanır.</p>
+      </footer>
+    </div>
+  </body>
+</html>

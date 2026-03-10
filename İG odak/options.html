@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>İG Odak - Ayarlar</title>
+    <link rel="stylesheet" href="options.css" />
+    <script src="options.js"></script>
+  </head>
+  <body>
+    <!-- Basit, modern ve anlaşılır ayarlar arayüzü -->
+    <div class="container">
+      <header>
+        <h1>İG Odak</h1>
+        <p>Instagram'daki dikkat dağıtıcı bileşenleri gizlemek için tercihlerinizi seçin.</p>
+      </header>
+
+      <section class="card">
+        <h2>Gizlenecek Unsurlar</h2>
+
+        <!-- Her özellik için ayrı toggle -->
+        <label class="toggle">
+          <input type="checkbox" id="hideReels" />
+          <span class="slider"></span>
+          <span class="label">Reels videoları ve sekmeleri</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideExplore" />
+          <span class="slider"></span>
+          <span class="label">Keşfet sayfası ve arama</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideNotifications" />
+          <span class="slider"></span>
+          <span class="label">Bildirimler ve aktivite</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="hideStories" />
+          <span class="slider"></span>
+          <span class="label">Hikayeler bölümü</span>
+        </label>
+      </section>
+
+      <footer>
+        <p>Tercihleriniz otomatik kaydedilir ve anında uygulanır.</p>
+      </footer>
+    </div>
+  </body>
+</html>

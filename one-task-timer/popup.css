@@ -1,0 +1,293 @@
+/* ─── One-Task Timer — popup.css ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap');
+
+/* ─── Themes ─────────────────────────────────────────────────────────────── */
+
+:root {
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t:    0.2s var(--ease);
+  --r:    10px;
+  --r-sm: 7px;
+}
+
+.theme-dark {
+  --bg:              #0e0f14;
+  --bg-card:         #141620;
+  --bg-elevated:     #1c1f2e;
+  --bg-input:        #191c2a;
+  --border:          rgba(255,255,255,0.07);
+  --border-input:    rgba(255,255,255,0.1);
+  --border-focus:    rgba(251,146,60,0.5);
+  --text:            #dde1f2;
+  --text-dim:        #6b7194;
+  --text-muted:      #2a2d42;
+  --accent:          #fb923c;   /* warm orange — urgency, focus, flame */
+  --accent-dim:      rgba(251,146,60,0.12);
+  --accent-glow:     rgba(251,146,60,0.22);
+  --ring-bg:         rgba(255,255,255,0.05);
+  --ring-fill:       #fb923c;
+  --stop-bg:         rgba(248,113,113,0.1);
+  --stop-border:     rgba(248,113,113,0.3);
+  --stop-color:      #f87171;
+  --quick-bg:        #1c1f2e;
+  --quick-border:    rgba(255,255,255,0.07);
+}
+
+.theme-light {
+  --bg:              #f6f5f0;
+  --bg-card:         #ffffff;
+  --bg-elevated:     #edeae2;
+  --bg-input:        #f0ede6;
+  --border:          rgba(0,0,0,0.08);
+  --border-input:    rgba(0,0,0,0.12);
+  --border-focus:    rgba(234,88,12,0.45);
+  --text:            #1c1a14;
+  --text-dim:        #7a7264;
+  --text-muted:      #ccc8be;
+  --accent:          #ea580c;
+  --accent-dim:      rgba(234,88,12,0.09);
+  --accent-glow:     rgba(234,88,12,0.2);
+  --ring-bg:         rgba(0,0,0,0.06);
+  --ring-fill:       #ea580c;
+  --stop-bg:         rgba(220,38,38,0.07);
+  --stop-border:     rgba(220,38,38,0.25);
+  --stop-color:      #dc2626;
+  --quick-bg:        #edeae2;
+  --quick-border:    rgba(0,0,0,0.08);
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { width:310px; }
+body {
+  width:310px;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'JetBrains Mono',monospace;
+  font-size:12.5px;
+  -webkit-font-smoothing:antialiased;
+  transition:background var(--t),color var(--t);
+}
+button,input { font-family:'JetBrains Mono',monospace; cursor:pointer; }
+
+/* ─── Shell ──────────────────────────────────────────────────────────────── */
+
+.shell { display:flex; flex-direction:column; padding-bottom:16px; }
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 14px 10px;
+  border-bottom:1px solid var(--border);
+}
+
+.brand { display:flex; align-items:center; gap:8px; }
+.brand-icon { width:20px; height:20px; color:var(--accent); flex-shrink:0; }
+.brand-name {
+  font-size:11px; font-weight:600;
+  letter-spacing:0.08em; text-transform:uppercase;
+}
+
+.hdr-right { display:flex; gap:4px; align-items:center; }
+
+.icon-btn {
+  all:unset;
+  width:27px; height:27px;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--border);
+  background:var(--bg-elevated);
+  border-radius:var(--r-sm);
+  color:var(--text-dim);
+  font-size:10px; font-weight:500;
+  letter-spacing:0.05em;
+  cursor:pointer;
+  transition:all var(--t);
+}
+.icon-btn:hover { color:var(--text); border-color:var(--border-focus); background:var(--accent-dim); }
+
+/* ─── Active view ────────────────────────────────────────────────────────── */
+
+.active-view {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:22px 16px 14px;
+  gap:14px;
+}
+
+/* Ring clock */
+.active-clock-wrap {
+  position:relative;
+  width:90px; height:90px;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.ring-svg {
+  position:absolute;
+  inset:0;
+  transform:rotate(-90deg);
+}
+
+.ring-bg {
+  fill:none;
+  stroke:var(--ring-bg);
+  stroke-width:5;
+}
+
+.ring-fill {
+  fill:none;
+  stroke:var(--ring-fill);
+  stroke-width:5;
+  stroke-linecap:round;
+  transition:stroke-dashoffset 0.9s linear, stroke var(--t);
+}
+
+.clock-center {
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.clock-time {
+  font-size:19px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  color:var(--text);
+  transition:color var(--t);
+}
+
+/* Urgent state — ring goes red */
+.active-view.urgent .ring-fill  { stroke:#f87171; }
+.active-view.urgent .clock-time { color:#f87171; }
+.active-view.expired .ring-fill  { stroke:#f87171; stroke-dashoffset:213.6; }
+.active-view.expired .clock-time { color:#f87171; }
+
+.active-task {
+  font-family:'Instrument Serif',serif;
+  font-style:italic;
+  font-size:15px;
+  color:var(--text);
+  text-align:center;
+  max-width:240px;
+  line-height:1.4;
+  opacity:0.9;
+}
+
+.stop-btn {
+  all:unset;
+  display:flex; align-items:center; justify-content:center;
+  width:100%;
+  padding:9px 0;
+  background:var(--stop-bg);
+  border:1px solid var(--stop-border);
+  border-radius:var(--r-sm);
+  color:var(--stop-color);
+  font-size:11px; font-weight:600;
+  letter-spacing:0.1em; text-transform:uppercase;
+  cursor:pointer;
+  transition:all var(--t);
+}
+.stop-btn:hover { background:rgba(248,113,113,0.18); }
+
+/* ─── Setup view ─────────────────────────────────────────────────────────── */
+
+.setup-view {
+  display:flex; flex-direction:column; gap:12px;
+  padding:16px 14px 0;
+}
+
+.input-group { display:flex; flex-direction:column; gap:5px; }
+
+.input-label {
+  font-size:9.5px; font-weight:600;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+.task-input {
+  all:unset;
+  display:block;
+  width:100%;
+  padding:9px 11px;
+  background:var(--bg-input);
+  border:1px solid var(--border-input);
+  border-radius:var(--r-sm);
+  color:var(--text);
+  font-size:12.5px;
+  transition:border-color var(--t), background var(--t);
+}
+.task-input:focus { border-color:var(--border-focus); background:var(--bg-card); }
+.task-input::placeholder { color:var(--text-muted); }
+
+/* Duration row */
+.dur-row {
+  display:flex; gap:7px; align-items:center;
+}
+
+.dur-input {
+  all:unset;
+  width:64px;
+  padding:8px 11px;
+  background:var(--bg-input);
+  border:1px solid var(--border-input);
+  border-radius:var(--r-sm);
+  color:var(--text);
+  font-size:13px; font-weight:600;
+  text-align:center;
+  transition:border-color var(--t);
+}
+.dur-input:focus { border-color:var(--border-focus); }
+.dur-input::-webkit-inner-spin-button { display:none; }
+
+.quick-btns { display:flex; gap:4px; flex:1; }
+
+.quick-btn {
+  all:unset;
+  flex:1;
+  padding:7px 0;
+  background:var(--quick-bg);
+  border:1px solid var(--quick-border);
+  border-radius:var(--r-sm);
+  color:var(--text-dim);
+  font-size:11px; font-weight:500;
+  text-align:center;
+  cursor:pointer;
+  transition:all var(--t);
+}
+.quick-btn:hover { color:var(--text); border-color:var(--border-focus); background:var(--accent-dim); }
+.quick-btn.selected { color:var(--accent); border-color:var(--accent); background:var(--accent-dim); }
+
+.start-btn {
+  all:unset;
+  display:flex; align-items:center; justify-content:center;
+  width:100%;
+  padding:11px 0;
+  background:var(--accent);
+  border-radius:var(--r-sm);
+  color:#fff;
+  font-size:11.5px; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase;
+  cursor:pointer;
+  transition:all var(--t);
+  box-shadow:0 0 0 0 var(--accent-glow);
+}
+.start-btn:hover {
+  opacity:0.9;
+  box-shadow:0 0 0 4px var(--accent-glow);
+}
+.start-btn:active { transform:scale(0.98); }
+
+/* ─── Tagline ─────────────────────────────────────────────────────────────── */
+
+.tagline {
+  font-size:10px; font-weight:300;
+  color:var(--text-dim);
+  text-align:center;
+  padding:12px 16px 0;
+  letter-spacing:0.05em;
+}
